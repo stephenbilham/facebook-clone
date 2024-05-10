@@ -8,7 +8,10 @@ const app = express();
 dotenv.config();
 
 app.use(cors());
+// Middleware to parse JSON
 app.use(express.json());
+// Middleware to parse x-www-form-urlencoded data
+app.use(express.urlencoded({ extended: true }));
 
 const routesPath = "./routes";
 const routeFiles = readdirSync(routesPath).filter((file) =>

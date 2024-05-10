@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
+const { ObjectId } = mongoose.Schema.Types;
+
 const userSchema = new mongoose.Schema(
 	{
 		first_name: {
@@ -15,7 +17,7 @@ const userSchema = new mongoose.Schema(
 			trim: true,
 			text: true,
 		},
-		user_name: {
+		username: {
 			type: String,
 			required: [true, "Username is required"],
 			trim: true,
