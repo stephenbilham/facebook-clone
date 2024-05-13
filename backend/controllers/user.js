@@ -1,5 +1,6 @@
 const User = require("../models/user");
 
+// inline example; i dont love it this way
 exports.register = async (req, res) => {
 	try {
 		const userObj = ({
