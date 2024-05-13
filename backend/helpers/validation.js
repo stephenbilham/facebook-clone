@@ -1,6 +1,6 @@
 const User = require("../models/user");
 
-exports.validateUsername = async (username) => {
+const validateUsername = async (username) => {
 	let newUsername = username;
 	let user = await User.findOne({ username });
 	let suffix = 1;
@@ -13,3 +13,5 @@ exports.validateUsername = async (username) => {
 	}
 	return newUsername;
 };
+
+module.exports = { validateUsername };

@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const { validateUsername } = require("../helpers/validation");
+const { generateToken } = require("../helpers/tokens");
 
 exports.register = async (req, res) => {
 	let {
@@ -34,6 +35,8 @@ exports.register = async (req, res) => {
 			bDay,
 			gender,
 		}).save();
+
+		const generateToken = generateToken({ id: user._id.toString() }, "30min");
 
 		res.status(200).send({ user });
 	} catch (err) {
