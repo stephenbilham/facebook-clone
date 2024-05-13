@@ -1,23 +1,43 @@
 const User = require("../models/user");
+const { validateUsername } = require("../helpers/validation");
 
-// inline example; i dont love it this way
 exports.register = async (req, res) => {
+	let {
+		first_name,
+		last_name,
+		username,
+		email,
+		password,
+		bYear,
+		bMonth,
+		bDay,
+		gender,
+	} = req.body;
+
+	if (!username) {
+		username = (first_name.toLowerCase() + last_name.toLowerCase()).trim();
+	}
+
 	try {
-		const userObj = ({
+		// Validate and obtain a unique username
+		const validatedUsername = await validateUsername(username);
+
+		// Create a new user with validated username
+		const user = await new User({
 			first_name,
 			last_name,
-			username,
+			username: validatedUsername,
 			email,
 			password,
 			bYear,
 			bMonth,
 			bDay,
 			gender,
-		} = req.body);
+		}).save();
 
-		const user = await new User(userObj).save();
 		res.status(200).send({ user });
 	} catch (err) {
 		console.log("unable to register user", err);
+		res.status(500).send({ error: "Unable to register user" });
 	}
 };
