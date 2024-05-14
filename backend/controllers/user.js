@@ -78,7 +78,7 @@ const activateAccount = async (req, res) => {
 
 	userData.verified = true;
 	userData.save();
-	res.status(200).send(userData);
+	res.status(200).send({ message: "Account has been verified successfully" });
 };
 
 module.exports = { register, activateAccount };
