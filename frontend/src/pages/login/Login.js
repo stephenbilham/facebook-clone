@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import "./styles.css";
 
@@ -24,7 +25,7 @@ const Login = () => {
 								<input type="checkbox" id="remember" />
 								<label htmlFor="remember">Remember me</label>
 							</div>
-							<a href="#" className="forgot-password">
+							<a href="#" alt="" className="forgot-password">
 								Forgot Password?
 							</a>
 						</div>
