@@ -4,92 +4,53 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Facebook Account Activation</title>
-		<style>
-			/* Reset styles */
-			body,
-			h1,
-			p {
-				margin: 0;
-				padding: 0;
-			}
-
-			/* Container styles */
-			.container {
-				max-width: 600px;
+	</head>
+	<body>
+		<div
+			style="
+				max-width: 800px;
 				margin: 0 auto;
 				padding: 20px;
 				font-family: Arial, sans-serif;
 				background-color: #f9f9f9;
-			}
-
-			/* Header styles */
-			.header {
-				text-align: center;
-				margin-bottom: 20px;
-			}
-
-			.logo {
-				width: 100px;
-			}
-
-			.title {
-				color: #3b5998;
-				font-size: 24px;
-				font-weight: bold;
-			}
-
-			/* Content styles */
-			.content {
-				background-color: #ffffff;
-				padding: 30px;
-				border-radius: 10px;
-				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-			}
-
-			.message {
-				font-size: 16px;
-				margin-bottom: 20px;
-			}
-
-			.action-btn {
-				display: inline-block;
-				padding: 10px 20px;
-				background-color: #4c649b;
-				color: #ffffff;
-				text-decoration: none;
-				font-weight: bold;
-				border-radius: 5px;
-			}
-
-			/* Footer styles */
-			.footer {
-				text-align: center;
-				margin-top: 20px;
-			}
-
-			.footer-text {
-				color: #666666;
-				font-size: 14px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<div class="header">
-				<img src="./assets/logo.png" alt="Facebook Logo" class="logo" />
-				<h1 class="title">Activate Your Facebook Account</h1>
+			"
+		>
+			<div style="text-align: center; margin-bottom: 20px">
+				<img src="./assets/logo.png" alt="Facebook Logo" style="width: 100px" />
+				<h1 style="color: #3b5998; font-size: 24px; font-weight: bold">
+					Activate Your Facebook Account
+				</h1>
 			</div>
-			<div class="content">
-				<p class="message">Hello, User!</p>
-				<p class="message">
+			<div
+				style="
+					background-color: #ffffff;
+					padding: 30px;
+					border-radius: 10px;
+					box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				"
+			>
+				<p style="font-size: 16px; margin-bottom: 20px">Hello there!</p>
+				<p style="font-size: 16px; margin-bottom: 20px">
 					You've recently created an account on Facebook. To complete your
 					registration, please confirm your account by clicking the button
 					below.
 				</p>
-				<a href="${url}" class="action-btn">Confirm Your Account</a>
+				<a
+					href="${url}"
+					style="
+						display: inline-block;
+						padding: 10px 20px;
+						background-color: #4c649b;
+						color: #ffffff;
+						text-decoration: none;
+						font-weight: bold;
+						border-radius: 5px;
+					"
+					>Confirm Your Account</a
+				>
 			</div>
-			<div class="footer">
-				<p class="footer-text">
+			<div style="text-align: center; margin-top: 20px">
+				<p style="color: #666666; font-size: 14px">
 					Facebook allows you to stay in touch with all your friends. Once
 					registered, you can share photos, organize events, and much more.
 				</p>
@@ -97,3 +58,52 @@
 		</div>
 	</body>
 </html>
+<div
+	style="
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 20px;
+		font-family: Arial, sans-serif;
+		background-color: #f9f9f9;
+	"
+>
+	<div style="text-align: center; margin-bottom: 20px">
+		<img src="./assets/logo.png" alt="Facebook Logo" style="width: 100px" />
+		<h1 style="color: #3b5998; font-size: 24px; font-weight: 700">
+			Activate Your Facebook Account
+		</h1>
+	</div>
+	<div
+		style="
+			background-color: #fff;
+			padding: 30px;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		"
+	>
+		<p style="font-size: 16px; margin-bottom: 20px">Hello there ${name}!</p>
+		<p style="font-size: 16px; margin-bottom: 20px">
+			You've recently created an account on Facebook. To complete your
+			registration, please confirm your account by clicking the button below.
+		</p>
+		<a
+			href="${url}"
+			style="
+				display: inline-block;
+				padding: 10px 20px;
+				background-color: #4c649b;
+				color: #fff;
+				text-decoration: none;
+				font-weight: 700;
+				border-radius: 5px;
+			"
+			>Confirm Your Account</a
+		>
+	</div>
+	<div style="text-align: center; margin-top: 20px">
+		<p style="color: #666; font-size: 14px">
+			Facebook allows you to stay in touch with all your friends. Once
+			registered, you can share photos, organize events, and much more.
+		</p>
+	</div>
+</div>

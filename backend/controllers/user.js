@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const { validateUsername } = require("../helpers/validation");
+const { sendVerificationEmail } = require("../helpers/mailer");
 const { generateToken } = require("../helpers/tokens");
 
 exports.register = async (req, res) => {
@@ -36,7 +37,13 @@ exports.register = async (req, res) => {
 			gender,
 		}).save();
 
-		const generateToken = generateToken({ id: user._id.toString() }, "30min");
+		const emailVerficationToken = generateToken(
+			{ id: user._id.toString() },
+			"30min"
+		);
+		const url = `${process.env.BASE_URL}/activate/${emailVerficationToken}`;
+
+		sendVerificationEmail(user.email, user.first_name, url);
 
 		res.status(200).send({ user });
 	} catch (err) {
