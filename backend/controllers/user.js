@@ -63,22 +63,32 @@ const register = async (req, res) => {
 };
 
 const activateAccount = async (req, res) => {
-	const { token } = req.body;
-	const user = jwt.verify(token, process.env.TOKEN_SECRET);
-	const userData = await User.findById(user.id);
+	try {
+		const { token } = req.body;
+		const user = jwt.verify(token, process.env.TOKEN_SECRET);
+		const userData = await User.findById(user.id);
 
-	if (!userData) {
-		console.log("User not found in database");
-		return res.status(404).json({ error: "User not found" });
+		if (!userData) {
+			console.log("User not found in database");
+			return res.status(404).json({ error: "User not found" });
+		}
+
+		if (userData.verified) {
+			return res
+				.status(400)
+				.send({ message: "This email is already activated." });
+		}
+
+		userData.verified = true;
+		await userData.save();
+
+		return res
+			.status(200)
+			.send({ message: "Account has been verified successfully" });
+	} catch (error) {
+		console.error("Error verifying token:", error.message);
+		return res.status(400).json({ error: "Invalid token" });
 	}
-
-	if (userData.verified) {
-		res.status(400).send({ message: "This email is already activated." });
-	}
-
-	userData.verified = true;
-	userData.save();
-	res.status(200).send({ message: "Account has been verified successfully" });
 };
 
 module.exports = { register, activateAccount };
