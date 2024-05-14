@@ -1,6 +1,9 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const { validateUsername } = require("../helpers/validation");
+const {
+	prepareRegisterAndLoginData,
+} = require("../helpers/prepareRegisterAndLoginData");
 const { sendVerificationEmail } = require("../helpers/mailer");
 const { generateToken } = require("../helpers/tokens");
 
@@ -45,15 +48,10 @@ const register = async (req, res) => {
 		const url = `${process.env.BASE_URL}/activate/${emailVerficationToken}`;
 		sendVerificationEmail(user.email, user.first_name, url);
 
-		const token = generateToken({ id: user._id.toString() }, "7d");
+		const responseData = prepareRegisterAndLoginData(user);
+
 		res.status(200).send({
-			id: user._id.toString(),
-			username: user.username,
-			picture: user.picture,
-			first_name: user.first_name,
-			last_name: user.last_name,
-			token,
-			verified: user.verified,
+			...responseData,
 			message: "Register success, please activate your email to start.",
 		});
 	} catch (err) {
@@ -70,7 +68,7 @@ const activateAccount = async (req, res) => {
 
 		if (!userData) {
 			console.log("User not found in database");
-			return res.status(404).json({ error: "User not found" });
+			return res.status(400).json({ error: "User not found" });
 		}
 
 		if (userData.verified) {
@@ -91,4 +89,34 @@ const activateAccount = async (req, res) => {
 	}
 };
 
-module.exports = { register, activateAccount };
+const login = async (req, res) => {
+	try {
+		const { email, password } = req.body;
+
+		const user = await User.findOne({ email });
+
+		if (!user) {
+			return res.status(400).send({
+				message: "This email you entered in not connected to an account.",
+			});
+		}
+
+		const match = await user.matchPassword(password);
+
+		if (!match) {
+			return res.status(400).send({ message: "invalid password or username" });
+		}
+
+		if (user && match) {
+			const responseData = prepareRegisterAndLoginData(user);
+			res.status(200).send({
+				...responseData,
+				message: "Login success",
+			});
+		}
+	} catch (err) {
+		return res.status(500).send({ message: err.message });
+	}
+};
+
+module.exports = { register, activateAccount, login };
