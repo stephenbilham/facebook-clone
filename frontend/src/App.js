@@ -1,15 +1,16 @@
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/login/Login";
+import Profile from "./pages/profile/Profile";
+import Home from "./pages/home/Home";
+
 function App() {
-	const get = async () => {
-		const response = await fetch("http://localhost:8000");
-		console.log(response);
-	};
-
-	get();
-
 	return (
 		<div>
-			welcome to frontend
-			<div className="all_friends_icon"></div>
+			<Routes>
+				<Route path="/login" element={<Login />} exact />
+				<Route path="/profile" element={<Profile />} exact />
+				<Route path="/" element={<Home />} />
+			</Routes>
 		</div>
 	);
 }

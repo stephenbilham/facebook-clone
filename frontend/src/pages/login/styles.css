@@ -1,0 +1,143 @@
+/* Overall container */
+.fb-login-container {
+	display: flex;
+	justify-content: center;
+	height: 100vh;
+	margin: 0 12px; /* Add margin around the container for mobile */
+}
+
+/* Main content area */
+.fb-login-content {
+	flex: 1;
+	padding: 20px; /* Adjust padding for mobile */
+	display: flex;
+	flex-direction: column; /* Stack items vertically on small screens */
+	justify-content: center;
+	align-items: center;
+}
+
+/* Login box */
+.login-box {
+	width: 100%; /* Adjust width for mobile */
+	max-width: 400px; /* Limit width on larger screens */
+	padding: 30px;
+	border: 1px solid #dddfe2;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+	background-color: #fff;
+}
+
+.login-box h2 {
+	text-align: center;
+	margin-bottom: 20px;
+	font-size: 24px;
+}
+
+.input-group {
+	margin-bottom: 20px;
+}
+
+.input-group label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: 600;
+	color: #65676b;
+}
+
+.input-group input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #dddfe2;
+	border-radius: 5px;
+}
+
+.login-btn {
+	width: 100%;
+	padding: 12px;
+	background-color: #1877f2;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+	background-color: #166fe5;
+}
+
+.options {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.remember-me {
+	display: flex;
+	align-items: center;
+}
+
+.remember-me input[type="checkbox"] {
+	margin-right: 5px;
+}
+
+.forgot-password {
+	color: #1877f2;
+	text-decoration: none;
+}
+
+/* Right sidebar */
+.fb-login-sidebar {
+	flex: 0 0 300px; /* Fixed width sidebar */
+	background-color: #f0f2f5;
+	padding: 20px;
+}
+
+.sidebar-content {
+	margin-top: 50px;
+}
+
+.sidebar-content h3 {
+	font-size: 20px;
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+
+.sidebar-content h4 {
+	font-size: 16px;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+.sidebar-content p {
+	margin-bottom: 15px;
+}
+
+/* Create account link */
+.create-account {
+	text-align: center;
+}
+
+.create-account a {
+	color: #1877f2;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.create-account a:hover {
+	text-decoration: underline;
+}
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+	.fb-login-container {
+		margin: 12px;
+	}
+	.fb-login-content {
+		padding: 0;
+	}
+	.fb-login-sidebar {
+		display: none;
+	}
+}
