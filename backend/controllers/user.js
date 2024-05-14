@@ -1,9 +1,10 @@
 const User = require("../models/user");
+const jwt = require("jsonwebtoken");
 const { validateUsername } = require("../helpers/validation");
 const { sendVerificationEmail } = require("../helpers/mailer");
 const { generateToken } = require("../helpers/tokens");
 
-exports.register = async (req, res) => {
+const register = async (req, res) => {
 	let {
 		first_name,
 		last_name,
@@ -42,12 +43,42 @@ exports.register = async (req, res) => {
 			"30min"
 		);
 		const url = `${process.env.BASE_URL}/activate/${emailVerficationToken}`;
-
 		sendVerificationEmail(user.email, user.first_name, url);
 
-		res.status(200).send({ user });
+		const token = generateToken({ id: user._id.toString() }, "7d");
+		res.status(200).send({
+			id: user._id.toString(),
+			username: user.username,
+			picture: user.picture,
+			first_name: user.first_name,
+			last_name: user.last_name,
+			token,
+			verified: user.verified,
+			message: "Register success, please activate your email to start.",
+		});
 	} catch (err) {
 		console.log("unable to register user", err);
 		res.status(500).send({ error: "Unable to register user" });
 	}
 };
+
+const activateAccount = async (req, res) => {
+	const { token } = req.body;
+	const user = jwt.verify(token, process.env.TOKEN_SECRET);
+	const userData = await User.findById(user.id);
+
+	if (!userData) {
+		console.log("User not found in database");
+		return res.status(404).json({ error: "User not found" });
+	}
+
+	if (userData.verified) {
+		res.status(400).send({ message: "This email is already activated." });
+	}
+
+	userData.verified = true;
+	userData.save();
+	res.status(200).send(userData);
+};
+
+module.exports = { register, activateAccount };
