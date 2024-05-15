@@ -1,58 +1,92 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
 import "./styles.css";
+import React, { useState } from "react";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import { Link } from "react-router-dom";
+import LoginInput from "../../components/inputs/loginInput/LoginInput";
 
 const Login = () => {
+	const [formValues, setFormValues] = useState({
+		email: "",
+		password: "",
+	});
+
+	const loginValidation = Yup.object({
+		email: Yup.string()
+			.email("Invalid email")
+			.required("Email is a required field")
+			.max(100),
+		password: Yup.string().required("Password is a required field"),
+	});
+
+	const handleFormValues = (e) => {
+		const { name, value } = e.target;
+		setFormValues({ ...formValues, [name]: value });
+	};
+
+	const onSubmit = (values) => {
+		console.log(values);
+	};
+
 	return (
-		<div className="fb-login-container">
-			<div className="fb-login-content">
-				<div className="login-box">
-					<h2>Facebook</h2>
-					<form>
-						<div className="input-group">
-							<label>Email or Phone Number</label>
-							<input type="text" placeholder="Email or Phone Number" />
+		<div className="login">
+			<div className="login_wrapper">
+				<div className="login_wrap">
+					<div className="login_1">
+						<img src="../../icons/facebook.svg" alt="Facebook text as logo" />
+						<span>
+							Facebook helps you connect and share with the people in your life.
+						</span>
+					</div>
+					<div className="login_2">
+						<div className="login_2_wrap">
+							<Formik
+								initialValues={formValues}
+								validationSchema={loginValidation}
+								onSubmit={(values) => {
+									onSubmit(values);
+								}}>
+								{(formik) => (
+									<Form>
+										<LoginInput
+											type="text"
+											name="email"
+											placeholder="Email address or Phone number"
+											onChange={(e) => {
+												formik.handleChange(e);
+												handleFormValues(e);
+											}}
+											value={formValues.email}
+										/>
+										<LoginInput
+											type="password"
+											name="password"
+											placeholder="Password"
+											onChange={(e) => {
+												formik.handleChange(e);
+												handleFormValues(e);
+											}}
+											value={formValues.password}
+										/>
+										<button type="submit" className="blue_btn">
+											Log In
+										</button>
+									</Form>
+								)}
+							</Formik>
+							<Link to="/forgot" className="forgot_password">
+								Forgotten password?
+							</Link>
+							<div className="sign_splitter"></div>
+							<button className="blue_btn open_signup">Create Account</button>
 						</div>
-						<div className="input-group">
-							<label>Password</label>
-							<input type="password" placeholder="Password" />
-						</div>
-						<button type="submit" className="login-btn">
-							Log In
-						</button>
-						<div className="options">
-							<div className="remember-me">
-								<input type="checkbox" id="remember" />
-								<label htmlFor="remember">Remember me</label>
-							</div>
-							<a href="#" alt="" className="forgot-password">
-								Forgot Password?
-							</a>
-						</div>
-						<hr />
-						<div className="create-account">
-							<a href="#">Create New Account</a>
-						</div>
-					</form>
+						<Link to="/" className="sign_extra">
+							<b>Create a Page</b>
+							for a celebrity, brand or business.
+						</Link>
+					</div>
 				</div>
-			</div>
-			<div className="fb-login-sidebar">
-				{/* Right Sidebar Content Goes Here */}
-				<div className="sidebar-content">
-					<h3>Connect with friends and the world around you on Facebook.</h3>
-					<div>
-						<h4>News Feed</h4>
-						<p>See photos and updates from friends.</p>
-					</div>
-					<div>
-						<h4>Timeline</h4>
-						<p>Share what's new in your life.</p>
-					</div>
-					<div>
-						<h4>Facebook Search</h4>
-						<p>Find more of what you're looking for.</p>
-					</div>
-				</div>
+				<div className="register"></div>
 			</div>
 		</div>
 	);

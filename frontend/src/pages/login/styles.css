@@ -1,143 +1,68 @@
-/* Overall container */
-.fb-login-container {
-	display: flex;
-	justify-content: center;
-	height: 100vh;
-	margin: 0 12px; /* Add margin around the container for mobile */
+.login_wrapper {
+	background: var(--bg-secondary);
 }
 
-/* Main content area */
-.fb-login-content {
-	flex: 1;
-	padding: 20px; /* Adjust padding for mobile */
-	display: flex;
-	flex-direction: column; /* Stack items vertically on small screens */
-	justify-content: center;
-	align-items: center;
+.login_wrap {
+	height: 78vh;
+	color: var(--color-primary);
 }
-
-/* Login box */
-.login-box {
-	width: 100%; /* Adjust width for mobile */
-	max-width: 400px; /* Limit width on larger screens */
-	padding: 30px;
-	border: 1px solid #dddfe2;
-	border-radius: 8px;
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-	background-color: #fff;
+.login_1 {
+	width: 300px;
+	margin: 0 auto;
 }
-
-.login-box h2 {
-	text-align: center;
-	margin-bottom: 20px;
-	font-size: 24px;
-}
-
-.input-group {
-	margin-bottom: 20px;
-}
-
-.input-group label {
-	display: block;
-	margin-bottom: 5px;
-	font-weight: 600;
-	color: #65676b;
-}
-
-.input-group input {
-	width: 100%;
-	padding: 10px;
-	border: 1px solid #dddfe2;
-	border-radius: 5px;
-}
-
-.login-btn {
-	width: 100%;
-	padding: 12px;
-	background-color: #1877f2;
-	color: #fff;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-}
-
-.login-btn:hover {
-	background-color: #166fe5;
-}
-
-.options {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 20px;
-}
-
-.remember-me {
-	display: flex;
-	align-items: center;
-}
-
-.remember-me input[type="checkbox"] {
-	margin-right: 5px;
-}
-
-.forgot-password {
-	color: #1877f2;
-	text-decoration: none;
-}
-
-/* Right sidebar */
-.fb-login-sidebar {
-	flex: 0 0 300px; /* Fixed width sidebar */
-	background-color: #f0f2f5;
-	padding: 20px;
-}
-
-.sidebar-content {
-	margin-top: 50px;
-}
-
-.sidebar-content h3 {
+.login_1 span {
 	font-size: 20px;
-	margin-bottom: 15px;
-	font-weight: bold;
 }
-
-.sidebar-content h4 {
-	font-size: 16px;
-	margin-bottom: 5px;
-	font-weight: bold;
-}
-
-.sidebar-content p {
-	margin-bottom: 15px;
-}
-
-/* Create account link */
-.create-account {
+.login_2 {
 	text-align: center;
 }
-
-.create-account a {
-	color: #1877f2;
-	text-decoration: none;
-	font-weight: 600;
+.login_2_wrap {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	background: var(--bg-primary);
+	box-shadow: 0 1px 2px var(--shadow-1);
+	padding: 1rem;
+	padding-bottom: 2rem;
+	width: 350px;
+	height: -webkit-fit-content;
+	height: -moz-fit-content;
+	height: fit-content;
+	margin: 1rem auto;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border-radius: 10px;
 }
-
-.create-account a:hover {
+.login_2_wrap button {
+	width: 100%;
+	height: 50px;
+	font-size: 17px;
+	font-weight: 700;
+}
+.forgot_password {
+	color: var(--blue-color);
+	font-size: 14px;
+	cursor: pointer;
+}
+.forgot_password:hover {
 	text-decoration: underline;
 }
 
-/* Media query for mobile */
-@media (max-width: 768px) {
-	.fb-login-container {
-		margin: 12px;
-	}
-	.fb-login-content {
-		padding: 0;
-	}
-	.fb-login-sidebar {
-		display: none;
-	}
+.sign_splitter {
+	width: 100%;
+	height: 1px;
+	background: var(--bg-third);
+}
+.open_signup {
+	background: var(--green-color);
+	width: 70% !important;
+	font-weight: 600 !important;
+	font-size: 17px !important;
+	margin-top: 1rem;
+}
+.sign_extra {
+	font-size: 15px;
 }
