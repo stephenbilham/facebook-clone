@@ -17,6 +17,11 @@
 	margin-bottom: 10px;
 	color: var(--color-primary);
 }
+
+.input_wrap input:focus {
+	border-color: var(--blue-color);
+}
+
 .input_wrap.error input {
 	border-color: #b94a48;
 }
