@@ -81,9 +81,9 @@
 	border-top: 10px solid transparent;
 	border-bottom: 10px solid transparent;
 	position: absolute;
-	right: -9px;
-	top: 28%;
-	transform: scale(0.9);
+	right: -10px;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .error_desktop {

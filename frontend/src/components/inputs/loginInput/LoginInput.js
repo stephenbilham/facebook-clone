@@ -11,19 +11,18 @@ const LoginInput = ({ placeholder, bottom, ...props }) => {
 		query: "(min-width: 850px)",
 	});
 
+	const errorMessage = (arrowPositionClass) => (
+		<div className={`input_error ${desktopView ? "error_desktop" : ""}`}>
+			<ErrorMessage name={field.name} />
+			<div className={arrowPositionClass} />
+		</div>
+	);
+
 	return (
 		<div className={`input_wrap ${error ? "error" : ""}`}>
-			{error && !bottom && (
-				<div className={`input_error ${desktopView ? "error_desktop" : ""}`}>
-					{error && <ErrorMessage name={field.name} />}
-					{error && (
-						<div
-							className={`${
-								desktopView ? "error_arrow_left" : "error_arrow_top"
-							}`}></div>
-					)}
-				</div>
-			)}
+			{error &&
+				!bottom &&
+				errorMessage(desktopView ? "error_arrow_left" : "error_arrow_top")}
 			<input
 				type={field.type}
 				name={field.name}
@@ -31,21 +30,14 @@ const LoginInput = ({ placeholder, bottom, ...props }) => {
 				{...field}
 				{...props}
 			/>
-			{error && bottom && (
-				<div className={`input_error ${desktopView ? "error_desktop" : ""}`}>
-					{error && <ErrorMessage name={field.name} />}
-					{error && (
-						<div
-							className={`${
-								desktopView ? "error_arrow_left" : "error_arrow_bottom"
-							}`}></div>
-					)}
-				</div>
-			)}
+			{error &&
+				bottom &&
+				errorMessage(desktopView ? "error_arrow_left" : "error_arrow_bottom")}
 			{error && (
 				<i
 					className="error_icon"
-					style={{ top: `${!bottom && !desktopView ? "63%" : "15px"}` }}></i>
+					style={{ top: `${!bottom && !desktopView ? "63%" : "15px"}` }}
+				/>
 			)}
 		</div>
 	);
