@@ -5,6 +5,7 @@
 	flex-direction: column;
 	align-items: center;
 }
+
 .input_wrap input {
 	outline: none;
 	border: 1px solid var(--bg-third);
@@ -25,12 +26,29 @@
 .input_wrap.error input {
 	border-color: #b94a48;
 }
+
 .input_wrap i {
 	position: absolute;
 	right: 5px;
-	top: 15px;
 	transform: scale(0.8);
 }
+
+.error_icon {
+	background-image: url(../../../../public/icons/icons10.png);
+	background-size: auto;
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 21px;
+	width: 21px;
+	position: absolute;
+	right: 10px;
+	top: 15px;
+}
+
+.error_icon_mobile {
+	top: 63%;
+}
+
 .input_error {
 	position: relative;
 	padding: 15px 10px;
@@ -41,6 +59,7 @@
 	border-radius: 5px;
 	margin-bottom: 15px;
 }
+
 .error_arrow_top {
 	border-top: 10px solid #b94a48;
 	border-right: 10px solid transparent;
@@ -48,10 +67,27 @@
 	position: absolute;
 	bottom: -9px;
 }
+
 .error_arrow_bottom {
 	border-bottom: 10px solid #b94a48;
 	border-right: 10px solid transparent;
 	border-left: 10px solid transparent;
 	position: absolute;
 	top: -9px;
+}
+
+.error_arrow_left {
+	border-left: 10px solid #b94a48;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	position: absolute;
+	right: -9px;
+	top: 28%;
+	transform: scale(0.9);
+}
+
+.error_desktop {
+	position: absolute;
+	width: 300px;
+	left: -19.5rem;
 }
