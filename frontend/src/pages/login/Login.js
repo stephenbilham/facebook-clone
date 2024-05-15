@@ -67,6 +67,7 @@ const Login = () => {
 												handleFormValues(e);
 											}}
 											value={formValues.password}
+											bottom
 										/>
 										<button type="submit" className="blue_btn">
 											Log In

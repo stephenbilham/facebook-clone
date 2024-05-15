@@ -41,12 +41,12 @@
 	border-right: 10px solid transparent;
 	border-left: 10px solid transparent;
 	position: absolute;
-	bottom: -10px;
+	bottom: -9px;
 }
 .error_arrow_bottom {
 	border-bottom: 10px solid #b94a48;
 	border-right: 10px solid transparent;
 	border-left: 10px solid transparent;
 	position: absolute;
-	top: -10px;
+	top: -9px;
 }
