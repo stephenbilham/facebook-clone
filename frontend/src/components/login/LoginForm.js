@@ -1,35 +1,30 @@
-import React, { useState } from "react";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import { Link } from "react-router-dom";
-import LoginInput from "../inputs/loginInput/LoginInput";
-
+import * as Yup from "yup";
+import LoginInput from "../inputs/loginInput";
+import { useState } from "react";
+const loginInfos = {
+	email: "",
+	password: "",
+};
 const LoginForm = () => {
-	const [formValues, setFormValues] = useState({
-		email: "",
-		password: "",
-	});
-
+	const [login, setLogin] = useState(loginInfos);
+	const { email, password } = login;
+	const handleLoginChange = (e) => {
+		const { name, value } = e.target;
+		setLogin({ ...login, [name]: value });
+	};
 	const loginValidation = Yup.object({
 		email: Yup.string()
-			.email("Invalid email")
-			.required("Email is a required field")
+			.required("Email address is required.")
+			.email("Must be a valid email.")
 			.max(100),
-		password: Yup.string().required("Password is a required field"),
+		password: Yup.string().required("Password is required"),
 	});
-
-	const handleFormValues = (e) => {
-		const { name, value } = e.target;
-		setFormValues({ ...formValues, [name]: value });
-	};
-
-	const onSubmit = (values) => {
-		console.log(values);
-	};
 	return (
 		<div className="login_wrap">
 			<div className="login_1">
-				<img src="../../icons/facebook.svg" alt="Facebook text as logo" />
+				<img src="../../icons/facebook.svg" alt="" />
 				<span>
 					Facebook helps you connect and share with the people in your life.
 				</span>
@@ -37,28 +32,32 @@ const LoginForm = () => {
 			<div className="login_2">
 				<div className="login_2_wrap">
 					<Formik
-						initialValues={formValues}
 						enableReinitialize
-						validationSchema={loginValidation}
-						onSubmit={(values) => onSubmit(values)}>
-						<Form style={{ width: "100%" }}>
-							<LoginInput
-								type="text"
-								name="email"
-								placeholder="Email address or Phone number"
-								onChange={handleFormValues}
-							/>
-							<LoginInput
-								type="password"
-								name="password"
-								placeholder="Password"
-								onChange={handleFormValues}
-								bottom
-							/>
-							<button type="submit" className="blue_btn">
-								Log In
-							</button>
-						</Form>
+						initialValues={{
+							email,
+							password,
+						}}
+						validationSchema={loginValidation}>
+						{(formik) => (
+							<Form>
+								<LoginInput
+									type="text"
+									name="email"
+									placeholder="Email address or phone number"
+									onChange={handleLoginChange}
+								/>
+								<LoginInput
+									type="password"
+									name="password"
+									placeholder="Password"
+									onChange={handleLoginChange}
+									bottom
+								/>
+								<button type="submit" className="blue_btn">
+									Log In
+								</button>
+							</Form>
+						)}
 					</Formik>
 					<Link to="/forgot" className="forgot_password">
 						Forgotten password?

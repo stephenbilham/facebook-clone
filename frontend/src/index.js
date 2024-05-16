@@ -1,18 +1,20 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom";
 import "./index.css";
 import "./styles/icons/icons.css";
 import App from "./App";
-import { Provider } from "react-redux";
-import store from "./store";
 import { BrowserRouter as Router } from "react-router-dom";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import rootReducer from "./reducers";
+const store = createStore(rootReducer, composeWithDevTools());
 
-const root = createRoot(document.getElementById("root"));
-
-root.render(
-	<Provider store={store}>
-		<Router>
-			<App />
-		</Router>
-	</Provider>
+ReactDOM.render(
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
+  document.getElementById("root")
 );

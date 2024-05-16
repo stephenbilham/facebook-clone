@@ -1,60 +1,68 @@
 import { Form, Formik } from "formik";
 import { useState } from "react";
-import RegisterInput from "../inputs/registerInput/RegisterInput";
-import CustomSelect from "../customSelect/CustomSelect";
+import RegisterInput from "../inputs/registerInput";
 import * as Yup from "yup";
-
-const userInfos = {
-	first_name: "",
-	last_name: "",
-	email: "",
-	password: "",
-	bYear: new Date().getFullYear(),
-	bMonth: new Date().getMonth() + 1,
-	bDay: new Date().getDate(),
-	gender: "",
-};
+import DateOfBirthSelect from "./DateOfBirthSelect";
+import GenderSelect from "./GenderSelect";
 
 const RegisterForm = () => {
+	const userInfos = {
+		first_name: "",
+		last_name: "",
+		email: "",
+		password: "",
+		bYear: new Date().getFullYear(),
+		bMonth: new Date().getMonth() + 1,
+		bDay: new Date().getDate(),
+		gender: "",
+	};
 	const [user, setUser] = useState(userInfos);
-
-	const { bYear, bMonth, bDay } = user;
-
+	const {
+		first_name,
+		last_name,
+		email,
+		password,
+		bYear,
+		bMonth,
+		bDay,
+		gender,
+	} = user;
+	const yearTemp = new Date().getFullYear();
 	const handleRegisterChange = (e) => {
 		const { name, value } = e.target;
 		setUser({ ...user, [name]: value });
 	};
-
+	const years = Array.from(new Array(108), (val, index) => yearTemp - index);
+	const months = Array.from(new Array(12), (val, index) => 1 + index);
 	const getDays = () => {
 		return new Date(bYear, bMonth, 0).getDate();
 	};
-
-	const tempYear = new Date().getFullYear();
-	const years = Array.from(new Array(108), (__, index) => tempYear - index);
-	const months = Array.from(new Array(12), (__, index) => index + 1);
-	const days = [...Array(getDays())].map((__, index) => index + 1);
-
+	const days = Array.from(new Array(getDays()), (val, index) => 1 + index);
 	const registerValidation = Yup.object({
 		first_name: Yup.string()
-			.required("First name is required.")
-			.min(2, "First name must be between 2-16 characters.")
-			.max(16, "First name must be between 2-16 characters.")
-			.matches(/^[aA-zZ]+$/, "Numbers and special characters not allowed."),
+			.required("What's your First name ?")
+			.min(2, "Fisrt name must be between 2 and 16 characters.")
+			.max(16, "Fisrt name must be between 2 and 16 characters.")
+			.matches(/^[aA-zZ]+$/, "Numbers and special characters are not allowed."),
 		last_name: Yup.string()
-			.required("Last name is required.")
-			.min(2, "Last name must be between 2-16 characters.")
-			.max(16, "Last name must be between 2-16 characters."),
+			.required("What's your Last name ?")
+			.min(2, "Last name must be between 2 and 16 characters.")
+			.max(16, "Last name must be between 2 and 16 characters.")
+			.matches(/^[aA-zZ]+$/, "Numbers and special characters are not allowed."),
 		email: Yup.string()
-			.required("You'll need this to login or to reset your password.")
+			.required(
+				"You'll need this when you log in and if you ever need to reset your password."
+			)
 			.email("Enter a valid email address."),
 		password: Yup.string()
 			.required(
-				"Enter a combination of at least 6 numbers, letters, and punctuation marks (such as ! and &)."
+				"Enter a combination of at least six numbers,letters and punctuation marks(such as ! and &)."
 			)
-			.min(6, "Password must be at least 6 characters.")
-			.max(36, "Password cannot be more than 36 characters."),
+			.min(6, "Password must be atleast 6 characters.")
+			.max(36, "Password can't be more than 36 characters"),
 	});
-
+	const [dateError, setDateError] = useState("");
+	const [genderError, setGenderError] = useState("");
 	return (
 		<div className="blur">
 			<div className="register">
@@ -64,112 +72,109 @@ const RegisterForm = () => {
 					<span>it's quick and easy</span>
 				</div>
 				<Formik
-					initialValues={user}
 					enableReinitialize
-					validationSchema={registerValidation}>
-					<Form className="register_form">
-						<div className="reg_line">
-							<RegisterInput
-								type="text"
-								placeholder="First name"
-								name="first_name"
-								onChange={handleRegisterChange}
-							/>
-							<RegisterInput
-								type="text"
-								placeholder="Last Name"
-								name="last_name"
-								onChange={handleRegisterChange}
-							/>
-						</div>
-						<div className="reg_line">
-							<RegisterInput
-								type="text"
-								placeholder="Mobile number or email address"
-								name="email"
-								onChange={handleRegisterChange}
-							/>
-						</div>
-						<div className="reg_line">
-							<RegisterInput
-								type="password"
-								placeholder="New password"
-								name="password"
-								onChange={handleRegisterChange}
-							/>
-						</div>
-						<div className="reg_col">
-							<div className="reg_line_header">
-								Date of birth <i className="info_icon"></i>
-							</div>
-							<div className="reg_grid">
-								<CustomSelect
-									name="bDay"
-									options={days}
-									value={bDay}
+					initialValues={{
+						first_name,
+						last_name,
+						email,
+						password,
+						bYear,
+						bMonth,
+						bDay,
+						gender,
+					}}
+					validationSchema={registerValidation}
+					onSubmit={() => {
+						let current_date = new Date();
+						let picked_date = new Date(bYear, bMonth - 1, bDay);
+						let atleast14 = new Date(1970 + 14, 0, 1);
+						let noMoreThan70 = new Date(1970 + 70, 0, 1);
+						if (current_date - picked_date < atleast14) {
+							setDateError(
+								"it looks like you(ve enetered the wrong info.Please make sure that you use your real date of birth."
+							);
+						} else if (current_date - picked_date > noMoreThan70) {
+							setDateError(
+								"it looks like you(ve enetered the wrong info.Please make sure that you use your real date of birth."
+							);
+						} else if (gender === "") {
+							setDateError("");
+							setGenderError(
+								"Please choose a gender. You can change who can see this later."
+							);
+						} else {
+							setDateError("");
+							setGenderError("");
+						}
+					}}>
+					{(formik) => (
+						<Form className="register_form">
+							<div className="reg_line">
+								<RegisterInput
+									type="text"
+									placeholder="First name"
+									name="first_name"
 									onChange={handleRegisterChange}
 								/>
-								<CustomSelect
-									name="bMonth"
-									options={months}
-									value={bMonth}
-									onChange={handleRegisterChange}
-								/>
-								<CustomSelect
-									name="bYear"
-									options={years}
-									value={bYear}
+								<RegisterInput
+									type="text"
+									placeholder="Surname"
+									name="last_name"
 									onChange={handleRegisterChange}
 								/>
 							</div>
-						</div>
-						<div className="reg_col">
-							<div className="reg_line_header">
-								Gender <i className="info_icon"></i>
+							<div className="reg_line">
+								<RegisterInput
+									type="text"
+									placeholder="Mobile number or email address"
+									name="email"
+									onChange={handleRegisterChange}
+								/>
 							</div>
-							<div className="reg_grid">
-								<label htmlFor="male">
-									Male
-									<input
-										type="radio"
-										name="gender"
-										id="male"
-										value="male"
-										onChange={handleRegisterChange}
-									/>
-								</label>
-								<label htmlFor="female">
-									Female
-									<input
-										type="radio"
-										name="gender"
-										id="female"
-										value="female"
-										onChange={handleRegisterChange}
-									/>
-								</label>
-								<label htmlFor="custom">
-									Custom
-									<input
-										type="radio"
-										name="gender"
-										id="custom"
-										value="custom"
-										onChange={handleRegisterChange}
-									/>
-								</label>
+							<div className="reg_line">
+								<RegisterInput
+									type="password"
+									placeholder="New password"
+									name="password"
+									onChange={handleRegisterChange}
+								/>
 							</div>
-						</div>
-						<div className="reg_infos">
-							By clicking Sign Up, you agree to our{" "}
-							<span>Terms, Data Policy &nbsp;</span>
-							and <span>Cookie Policy.</span> You may receive SMS notifications
-							from us and can opt out at any time.
-						</div>
-						<div className="reg_btn_wrapper">
-							<button className="blue_btn open_signup">Sign Up</button>
-						</div>
-					</Form>
+							<div className="reg_col">
+								<div className="reg_line_header">
+									Date of birth <i className="info_icon"></i>
+								</div>
+								<DateOfBirthSelect
+									bDay={bDay}
+									bMonth={bMonth}
+									bYear={bYear}
+									days={days}
+									months={months}
+									years={years}
+									handleRegisterChange={handleRegisterChange}
+									dateError={dateError}
+								/>
+							</div>
+							<div className="reg_col">
+								<div className="reg_line_header">
+									Gender <i className="info_icon"></i>
+								</div>
+
+								<GenderSelect
+									handleRegisterChange={handleRegisterChange}
+									genderError={genderError}
+								/>
+							</div>
+							<div className="reg_infos">
+								By clicking Sign Up, you agree to our{" "}
+								<span>Terms, Data Policy &nbsp;</span>
+								and <span>Cookie Policy.</span> You may receive SMS
+								notifications from us and can opt out at any time.
+							</div>
+							<div className="reg_btn_wrapper">
+								<button className="blue_btn open_signup">Sign Up</button>
+							</div>
+						</Form>
+					)}
 				</Formik>
 			</div>
 		</div>
