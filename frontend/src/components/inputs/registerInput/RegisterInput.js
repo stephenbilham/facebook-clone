@@ -7,6 +7,7 @@ const RegisterInput = ({ placeholder, bottom, ...props }) => {
 	const [field, meta] = useField(props);
 
 	const error = meta.touched && meta.error;
+	const valid = field.value && !meta.error;
 
 	const desktopView = useMediaQuery({
 		query: "(min-width: 850px)",
@@ -20,7 +21,10 @@ const RegisterInput = ({ placeholder, bottom, ...props }) => {
 	);
 
 	return (
-		<div className={`input_wrap ${error ? "error" : ""}`}>
+		<div
+			className={`input_wrap register_input_wrap ${
+				valid ? "valid_input_bg" : ""
+			} ${error ? "error" : ""}`}>
 			<input
 				className={meta.touched && meta.error ? "input_error_border" : ""}
 				type={field.type}

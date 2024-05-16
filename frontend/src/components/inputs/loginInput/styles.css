@@ -21,6 +21,7 @@
 
 .input_wrap input:focus {
 	border-color: var(--blue-color);
+	background: var(--light-blue-color);
 }
 
 .input_wrap.error input {
