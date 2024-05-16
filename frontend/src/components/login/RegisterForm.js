@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import RegisterInput from "../inputs/registerInput/RegisterInput";
+import CustomSelect from "../customSelect/CustomDropdown";
 
 const userInfos = {
 	first_name: "",
@@ -32,12 +33,13 @@ const RegisterForm = () => {
 		setUser({ ...user, [name]: value });
 	};
 
-	const years = Array.from(new Array(108), (__, index) => bYear - index);
-	const months = Array.from(new Array(12), (__, index) => index + 1);
 	const getDays = () => {
 		return new Date(bYear, bMonth, 0).getDate();
 	};
-	//same but prefered
+
+	const tempYear = new Date().getFullYear();
+	const years = Array.from(new Array(108), (__, index) => tempYear - index);
+	const months = Array.from(new Array(12), (__, index) => index + 1);
 	const days = [...Array(getDays())].map((__, index) => index + 1);
 
 	return (
@@ -86,33 +88,24 @@ const RegisterForm = () => {
 									Date of birth <i className="info_icon"></i>
 								</div>
 								<div className="reg_grid">
-									<select name="bDay" onChange={handleRegisterChange}>
-										{days.map((day) => (
-											<option value={day} key={day}>
-												{day}
-											</option>
-										))}
-									</select>
-									<select
+									<CustomSelect
+										name="bDay"
+										options={days}
+										value={bDay}
+										onChange={handleRegisterChange}
+									/>
+									<CustomSelect
 										name="bMonth"
+										options={months}
 										value={bMonth}
-										onChange={handleRegisterChange}>
-										{months.map((month) => (
-											<option value={month} key={month}>
-												{month}
-											</option>
-										))}
-									</select>
-									<select
+										onChange={handleRegisterChange}
+									/>
+									<CustomSelect
 										name="bYear"
+										options={years}
 										value={bYear}
-										onChange={handleRegisterChange}>
-										{years.map((year) => (
-											<option value={year} key={year}>
-												{year}
-											</option>
-										))}
-									</select>
+										onChange={handleRegisterChange}
+									/>
 								</div>
 							</div>
 							<div className="reg_col">
