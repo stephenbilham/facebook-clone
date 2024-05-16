@@ -7,19 +7,38 @@ const userInfos = {
 	last_name: "",
 	email: "",
 	password: "",
-	bYear: "",
-	bMonth: "",
-	bDay: "",
+	bYear: new Date().getFullYear(),
+	bMonth: new Date().getMonth() + 1,
+	bDay: new Date().getDate(),
 	gender: "",
 };
 
 const RegisterForm = () => {
 	const [user, setUser] = useState(userInfos);
 
+	const {
+		first_name,
+		last_name,
+		email,
+		password,
+		bYear,
+		bMonth,
+		bDay,
+		gender,
+	} = user;
+
 	const handleRegisterChange = (e) => {
 		const { name, value } = e.target;
 		setUser({ ...user, [name]: value });
 	};
+
+	const years = Array.from(new Array(108), (__, index) => bYear - index);
+	const months = Array.from(new Array(12), (__, index) => index + 1);
+	const getDays = () => {
+		return new Date(bYear, bMonth, 0).getDate();
+	};
+	//same but prefered
+	const days = [...Array(getDays())].map((__, index) => index + 1);
 
 	return (
 		<div className="blur">
@@ -67,14 +86,32 @@ const RegisterForm = () => {
 									Date of birth <i className="info_icon"></i>
 								</div>
 								<div className="reg_grid">
-									<select name="bDay">
-										<option>15</option>
+									<select name="bDay" onChange={handleRegisterChange}>
+										{days.map((day) => (
+											<option value={day} key={day}>
+												{day}
+											</option>
+										))}
 									</select>
-									<select name="bMonth">
-										<option>15</option>
+									<select
+										name="bMonth"
+										value={bMonth}
+										onChange={handleRegisterChange}>
+										{months.map((month) => (
+											<option value={month} key={month}>
+												{month}
+											</option>
+										))}
 									</select>
-									<select name="bYear">
-										<option>15</option>
+									<select
+										name="bYear"
+										value={bYear}
+										onChange={handleRegisterChange}>
+										{years.map((year) => (
+											<option value={year} key={year}>
+												{year}
+											</option>
+										))}
 									</select>
 								</div>
 							</div>
