@@ -41,7 +41,7 @@ const LoginForm = () => {
 						enableReinitialize
 						validationSchema={loginValidation}
 						onSubmit={(values) => onSubmit(values)}>
-						<Form>
+						<Form style={{ width: "100%" }}>
 							<LoginInput
 								type="text"
 								name="email"

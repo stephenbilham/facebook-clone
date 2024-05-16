@@ -14,7 +14,7 @@ const RegisterInput = ({ placeholder, bottom, ...props }) => {
 
 	const errorMessage = () => (
 		<div className={`input_error `}>
-			<div className="error_arrow_bottom"></div>
+			<div className="error_arrow_bottom" />
 			<ErrorMessage name={field.name} />
 		</div>
 	);
