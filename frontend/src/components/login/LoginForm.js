@@ -38,38 +38,27 @@ const LoginForm = () => {
 				<div className="login_2_wrap">
 					<Formik
 						initialValues={formValues}
+						enableReinitialize
 						validationSchema={loginValidation}
-						onSubmit={(values) => {
-							onSubmit(values);
-						}}>
-						{(formik) => (
-							<Form>
-								<LoginInput
-									type="text"
-									name="email"
-									placeholder="Email address or Phone number"
-									onChange={(e) => {
-										formik.handleChange(e);
-										handleFormValues(e);
-									}}
-									value={formValues.email}
-								/>
-								<LoginInput
-									type="password"
-									name="password"
-									placeholder="Password"
-									onChange={(e) => {
-										formik.handleChange(e);
-										handleFormValues(e);
-									}}
-									value={formValues.password}
-									bottom
-								/>
-								<button type="submit" className="blue_btn">
-									Log In
-								</button>
-							</Form>
-						)}
+						onSubmit={(values) => onSubmit(values)}>
+						<Form>
+							<LoginInput
+								type="text"
+								name="email"
+								placeholder="Email address or Phone number"
+								onChange={handleFormValues}
+							/>
+							<LoginInput
+								type="password"
+								name="password"
+								placeholder="Password"
+								onChange={handleFormValues}
+								bottom
+							/>
+							<button type="submit" className="blue_btn">
+								Log In
+							</button>
+						</Form>
 					</Formik>
 					<Link to="/forgot" className="forgot_password">
 						Forgotten password?
