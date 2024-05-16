@@ -50,3 +50,12 @@
 .custom-select-option:hover {
 	background: var(--color-secondary);
 }
+
+/* ---- MEDIA QUERIES ---- */
+
+@media (min-width: 539px) {
+	.custom-select {
+		width: 110px;
+	}
+}
+/* ---- MEDIA QUERIES ---- */

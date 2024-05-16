@@ -3,7 +3,7 @@ import "./style.css";
 import { useField, ErrorMessage } from "formik";
 import { useMediaQuery } from "react-responsive";
 
-export default function RegisterInput({ placeholder, bottom, ...props }) {
+const RegisterInput = ({ placeholder, bottom, ...props }) => {
 	const [field, meta] = useField(props);
 
 	const error = meta.touched && meta.error;
@@ -12,18 +12,15 @@ export default function RegisterInput({ placeholder, bottom, ...props }) {
 		query: "(min-width: 850px)",
 	});
 
-	const errorMessage = (arrowPositionClass) => (
-		<div className={`input_error ${desktopView ? "input_error_desktop" : ""}`}>
+	const errorMessage = () => (
+		<div className={`input_error `}>
+			<div className="error_arrow_bottom"></div>
 			<ErrorMessage name={field.name} />
-			<div className={arrowPositionClass}></div>
 		</div>
 	);
 
 	return (
 		<div className={`input_wrap ${error ? "error" : ""}`}>
-			{error &&
-				!bottom &&
-				errorMessage(desktopView ? "error_arrow_left" : "error_arrow_top")}
 			<input
 				className={meta.touched && meta.error ? "input_error_border" : ""}
 				type={field.type}
@@ -33,15 +30,15 @@ export default function RegisterInput({ placeholder, bottom, ...props }) {
 				{...field}
 				{...props}
 			/>
-			{error &&
-				bottom &&
-				errorMessage(desktopView ? "error_arrow_left" : "error_arrow_bottom")}
+			{error && errorMessage()}
 			{error && (
 				<i
 					className="error_icon"
-					style={{ top: `${!bottom && !desktopView ? "63%" : "15px"}` }}
+					style={{ top: `${!desktopView ? "63%" : "15px"}` }}
 				/>
 			)}
 		</div>
 	);
-}
+};
+
+export default RegisterInput;
