@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import RegisterInput from "../inputs/registerInput/RegisterInput";
-import CustomSelect from "../customSelect/CustomDropdown";
+import CustomSelect from "../customSelect/CustomSelect";
 import * as Yup from "yup";
 
 const userInfos = {
