@@ -1,3 +1,4 @@
+/* ---- LOGIN ---- */
 .login_wrapper {
 	background: var(--bg-secondary);
 }
@@ -66,11 +67,130 @@
 .sign_extra {
 	font-size: 15px;
 }
+/* ---- LOGIN ---- */
+
+/* ---- REGISTER ---- */
+.blur {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.register {
+	background: var(--bg-primary);
+	box-shadow: 0 1px 2px var(--shadow-1);
+	border-radius: 10px;
+	padding: 15px;
+	padding-bottom: 1rem;
+	width: 350px;
+	height: -webkit-fit-content;
+	height: -moz-fit-content;
+	height: fit-content;
+	color: var(--color-primary);
+}
+.register_header {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid var(--bg-third);
+}
+.register_header i {
+	position: absolute;
+	right: 0;
+	cursor: pointer;
+}
+.register_header span:first-of-type {
+	font-weight: 700;
+	font-size: 32px;
+}
+.register_header span:last-of-type {
+	font-size: 15px;
+	color: var(--color-secondary);
+}
+.register_form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.reg_line {
+	padding: 7px 0;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.reg_col {
+	position: relative;
+	align-self: flex-start;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+.reg_line_header {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	font-size: 13px;
+	color: var(--color-secondary);
+}
+.reg_line_header i {
+	margin-top: 3px;
+}
+.reg_grid {
+	margin-top: 5px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+	height: 35px;
+	width: 100%;
+}
+.reg_grid select {
+	width: 90px;
+	font-size: 16px;
+	color: var (--color-primary);
+	background: var (--bg-primary);
+	border-radius: 5px;
+	cursor: pointer;
+}
+.reg_grid label {
+	width: 90px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 16px;
+	color: var(--color-primary);
+	border-radius: 5px;
+	cursor: pointer;
+	border: 1px solid var (--color-secondary);
+	padding: 0 10px;
+}
+.reg_infos {
+	font-size: 11px;
+	margin-top: 10px;
+	color: var (--color-secondary);
+}
+.reg_infos span {
+	color: var (--blue-color);
+}
+.reg_btn_wrapper {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 20px 0 10px 0;
+}
+/* ---- REGISTER ---- */
 
 /* ---- FOOTER ---- */
 .login_footer {
 	height: 22vh;
-	background: var(--bg-primary);
+	background: var (--bg-primary);
 	padding: 1.5rem;
 }
 
@@ -79,7 +199,7 @@
 	flex-wrap: wrap;
 	gap: 3px 10px;
 	font-size: 13px;
-	color: var(--color-secondary);
+	color: var (--color-secondary);
 	max-width: 350px;
 	margin: 0 auto;
 
@@ -94,13 +214,13 @@
 }
 
 .footer_square {
-	background: var(--bg-secondary);
+	background: var (--bg-secondary);
 	height: 19px;
 	width: 30px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid var(--bg-third);
+	border: 1px solid var (--bg-third);
 
 	i {
 		transform: scale(0.8);
@@ -111,7 +231,7 @@
 .footer_splitter {
 	height: 1px;
 	width: 100%;
-	background-color: var(--bg-third);
+	background-color: var (--bg-third);
 	margin: 10px auto;
 	max-width: 1100px;
 }

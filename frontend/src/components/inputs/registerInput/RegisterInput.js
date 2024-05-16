@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import "./styles.css";
-import { useField, ErrorMessage, useFormikContext } from "formik";
+import React from "react";
+import "./style.css";
+import { useField, ErrorMessage } from "formik";
 import { useMediaQuery } from "react-responsive";
 
-const LoginInput = ({ placeholder, bottom, ...props }) => {
+export default function RegisterInput({ placeholder, bottom, ...props }) {
 	const [field, meta] = useField(props);
-	const { setFieldTouched } = useFormikContext();
 
 	const error = meta.touched && meta.error;
 
@@ -13,24 +12,10 @@ const LoginInput = ({ placeholder, bottom, ...props }) => {
 		query: "(min-width: 850px)",
 	});
 
-	useEffect(() => {
-		let timer;
-
-		if (meta.touched) {
-			timer = setTimeout(() => {
-				setFieldTouched(field.name, false);
-			}, 6000);
-
-			return () => {
-				clearTimeout(timer);
-			};
-		}
-	}, [meta.touched, field.name, setFieldTouched]);
-
 	const errorMessage = (arrowPositionClass) => (
-		<div className={`input_error ${desktopView ? "error_desktop" : ""}`}>
+		<div className={`input_error ${desktopView ? "input_error_desktop" : ""}`}>
 			<ErrorMessage name={field.name} />
-			<div className={arrowPositionClass} />
+			<div className={arrowPositionClass}></div>
 		</div>
 	);
 
@@ -40,6 +25,7 @@ const LoginInput = ({ placeholder, bottom, ...props }) => {
 				!bottom &&
 				errorMessage(desktopView ? "error_arrow_left" : "error_arrow_top")}
 			<input
+				className={meta.touched && meta.error ? "input_error_border" : ""}
 				type={field.type}
 				name={field.name}
 				autoComplete={field.name}
@@ -58,6 +44,4 @@ const LoginInput = ({ placeholder, bottom, ...props }) => {
 			)}
 		</div>
 	);
-};
-
-export default LoginInput;
+}
