@@ -1,19 +1,17 @@
-import { useMediaQuery } from "react-responsive";
+// import { useMediaQuery } from "react-responsive";
 
 const GenderSelect = ({ handleRegisterChange, genderError }) => {
-	const view1 = useMediaQuery({
-		query: "(min-width: 539px)",
-	});
-	const view2 = useMediaQuery({
-		query: "(min-width: 850px)",
-	});
-	const view3 = useMediaQuery({
-		query: "(min-width: 1170px)",
-	});
+	// const view1 = useMediaQuery({
+	// 	query: "(min-width: 539px)",
+	// });
+	// const view2 = useMediaQuery({
+	// 	query: "(min-width: 850px)",
+	// });
+
 	return (
 		<div
 			className="reg_grid"
-			style={{ marginBottom: `${genderError && !view3 ? "70px" : "0"}` }}>
+			style={{ marginBottom: `${genderError ? "70px" : "0"}` }}>
 			<label htmlFor="male">
 				Male
 				<input
@@ -45,14 +43,8 @@ const GenderSelect = ({ handleRegisterChange, genderError }) => {
 				/>
 			</label>
 			{genderError && (
-				<div
-					className={
-						!view3 ? "input_error" : "input_error input_error_select_large"
-					}>
-					<div
-						className={
-							!view3 ? "error_arrow_bottom" : "error_arrow_left"
-						}></div>
+				<div className="input_error">
+					<div className="error_arrow_bottom" />
 					{genderError}
 				</div>
 			)}

@@ -1,3 +1,5 @@
+import React from "react";
+import Select from "react-dropdown-select";
 import { useMediaQuery } from "react-responsive";
 
 const DateOfBirthSelect = ({
@@ -10,49 +12,48 @@ const DateOfBirthSelect = ({
 	handleRegisterChange,
 	dateError,
 }) => {
-	const view1 = useMediaQuery({
-		query: "(min-width: 539px)",
-	});
-	const view2 = useMediaQuery({
-		query: "(min-width: 850px)",
-	});
-	const view3 = useMediaQuery({
-		query: "(min-width: 1170px)",
-	});
+	const view2 = useMediaQuery({ query: "(min-width: 539px)" });
+
+	const isError = Boolean(dateError);
+
+	const errorClass = "input_error";
+	const errorArrowClass = "error_arrow_bottom";
+	const marginBottom =
+		isError && !view2 ? "70px" : view2 && isError ? "60px" : "0px";
+
+	const handleSelectChange = (name) => (values) => {
+		handleRegisterChange({ target: { name, value: values[0].value } });
+	};
+
+	const formatOptions = (options) =>
+		options.map((opt) => ({ label: opt, value: opt }));
+
 	return (
-		<div
-			className="reg_grid"
-			style={{ marginBottom: `${dateError && !view3 ? "90px" : "0"}` }}>
-			<select name="bDay" value={bDay} onChange={handleRegisterChange}>
-				{days.map((day, i) => (
-					<option value={day} key={i}>
-						{day}
-					</option>
-				))}
-			</select>
-			<select name="bMonth" value={bMonth} onChange={handleRegisterChange}>
-				{months.map((month, i) => (
-					<option value={month} key={i}>
-						{month}
-					</option>
-				))}
-			</select>
-			<select name="bYear" value={bYear} onChange={handleRegisterChange}>
-				{years.map((year, i) => (
-					<option value={year} key={i}>
-						{year}
-					</option>
-				))}
-			</select>
-			{dateError && (
-				<div
-					className={
-						!view3 ? "input_error" : "input_error input_error_select_large"
-					}>
-					<div
-						className={
-							!view3 ? "error_arrow_bottom" : "error_arrow_left"
-						}></div>
+		<div className="reg_grid" style={{ marginBottom }}>
+			<Select
+				options={formatOptions(days)}
+				values={[{ label: bDay, value: bDay }]}
+				onChange={handleSelectChange("bDay")}
+				placeholder="Day"
+				className="custom-select"
+			/>
+			<Select
+				options={formatOptions(months)}
+				values={[{ label: bMonth, value: bMonth }]}
+				onChange={handleSelectChange("bMonth")}
+				placeholder="Month"
+				className="custom-select"
+			/>
+			<Select
+				options={formatOptions(years)}
+				values={[{ label: bYear, value: bYear }]}
+				onChange={handleSelectChange("bYear")}
+				placeholder="Year"
+				className="custom-select"
+			/>
+			{isError && (
+				<div className={errorClass}>
+					<div className={errorArrowClass}></div>
 					{dateError}
 				</div>
 			)}

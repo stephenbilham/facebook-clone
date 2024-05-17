@@ -40,12 +40,12 @@ const RegisterForm = () => {
 	const days = Array.from(new Array(getDays()), (val, index) => 1 + index);
 	const registerValidation = Yup.object({
 		first_name: Yup.string()
-			.required("What's your First name ?")
+			.required("First name is required.")
 			.min(2, "Fisrt name must be between 2 and 16 characters.")
 			.max(16, "Fisrt name must be between 2 and 16 characters.")
 			.matches(/^[aA-zZ]+$/, "Numbers and special characters are not allowed."),
 		last_name: Yup.string()
-			.required("What's your Last name ?")
+			.required("Last name is required.")
 			.min(2, "Last name must be between 2 and 16 characters.")
 			.max(16, "Last name must be between 2 and 16 characters.")
 			.matches(/^[aA-zZ]+$/, "Numbers and special characters are not allowed."),
@@ -91,11 +91,11 @@ const RegisterForm = () => {
 						let noMoreThan70 = new Date(1970 + 70, 0, 1);
 						if (current_date - picked_date < atleast14) {
 							setDateError(
-								"it looks like you(ve enetered the wrong info.Please make sure that you use your real date of birth."
+								"You need to be over 14 to fall within our age guidelines."
 							);
 						} else if (current_date - picked_date > noMoreThan70) {
 							setDateError(
-								"it looks like you(ve enetered the wrong info.Please make sure that you use your real date of birth."
+								"You need to be under 70 to fall within our age guidelines."
 							);
 						} else if (gender === "") {
 							setDateError("");
