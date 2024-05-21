@@ -44,7 +44,10 @@ const RegisterForm = () => {
 	const registerSubmit = async (userData) => {
 		try {
 			setFormState((prevState) => ({ ...prevState, loading: true }));
-			await axios.post("http://localhost:8000/register", userData);
+			await axios.post(
+				`${process.env.REACT_APP_BACKEND_URL}/register`,
+				userData
+			);
 			setFormState((prevState) => ({
 				...prevState,
 				loading: false,
@@ -170,7 +173,7 @@ const RegisterForm = () => {
 								/>
 								<RegisterInput
 									type="text"
-									placeholder="Surname"
+									placeholder="Last name"
 									name="last_name"
 									onChange={handleRegisterChange}
 								/>
